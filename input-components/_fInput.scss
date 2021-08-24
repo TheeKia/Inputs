@@ -1,0 +1,52 @@
+.fInput {
+  display: inline-flex;
+  width: 250px;
+  label {
+    position: relative;
+    width: 100%;
+    display: flex;
+    height: $inputs-height;
+    line-height: $inputs-height;
+    padding: 0 10px;
+    border-radius: $inputs-border-radius;
+    border: 1px solid $inputs-border-color;
+    font-size: 0.92em;
+    overflow: hidden;
+    font-family: monospace;
+    line-break: anywhere;
+    &::before {
+      content: attr(data-icon);
+      font-family: "Material Icons", "Material Icons Outlined",
+        "Material Icons Round", "Material Icons Sharp",
+        "Material Icons Two Tone";
+      margin: 0 0.2em 0 0;
+    }
+    .fI-detail {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      padding: 1px 2px;
+      transform: translateY(-50%);
+      line-height: normal;
+      border-radius: $inputs-border-radius;
+      border: 1px solid rgba(50, 50, 50, 0.3);
+      color: #555;
+    }
+  }
+  input {
+    opacity: 0;
+    visibility: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+  &.active {
+    label {
+      border-color: $inputs-border-active-color;
+    }
+  }
+  &:hover {
+    label {
+      background: rgba(50, 50, 50, 0.05);
+    }
+  }
+}

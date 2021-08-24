@@ -1,0 +1,47 @@
+/*
+UPPERCASE classes are handled by JavaScript
+- .rtl can be added to body element
+*/
+
+$bg-color: #ecf0f3;
+$inputs-border-color: #ccc;
+$inputs-border-active-color: #777;
+$inputs-border-radius: 2px;
+$inputs-height: 36px;
+
+* {
+  box-sizing: border-box;
+}
+
+// For triggering when autofilled
+@keyframes autofilled {
+}
+@keyframes stopActivation {
+}
+
+// Animations
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.flat-left,
+.flat-left label,
+.flat-left input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.flat-right,
+.flat-right label,
+.flat-right input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@import "input-components/tInput";
+@import "input-components/crInput.scss";
+@import "input-components/fInput";
