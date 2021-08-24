@@ -1,7 +1,4 @@
 class TInput {
-  /*
-   *  Create instences of the class by passing .tInput element to it
-   */
   constructor(tInput) {
     this.tInput = tInput;
     this.input = tInput.querySelector("input");
@@ -93,149 +90,6 @@ class RInput {
     this.label.prepend(span);
   }
 }
-
-// tInput
-document.querySelectorAll(".tInput").forEach((tInput) => {
-  new TInput(tInput);
-});
-// cr-Input
-document.querySelectorAll(".cInput").forEach((cInput) => {
-  new CInput(cInput);
-});
-document.querySelectorAll(".rInput").forEach((rInput) => {
-  new RInput(rInput);
-});
-
-// Open Select + sOption click
-function neoSelect(inputID, val) {
-  let input = document.getElementById(inputID);
-  let parent = input.parentElement;
-  let sOption = parent.querySelector("[data-value=" + val + "]");
-  if (sOption) {
-    let allOptions = sOption.parentElement.querySelectorAll(".sOption");
-    input.value = val;
-    if (!sOption.classList.contains("Select-Active")) {
-      allOptions.forEach((option) => {
-        if (option.classList.contains("Select-Active")) {
-          option.classList.remove("Select-Active");
-        }
-      });
-      sOption.classList.add("Select-Active");
-    }
-    if (parent.querySelector(".selected-option") !== null) {
-      parent.querySelector(".selected-option").innerHTML =
-        ": " + sOption.innerHTML;
-    }
-  } else {
-    console.warn(
-      'No option with the value "' + val + '" was found in the select'
-    );
-  }
-}
-document.querySelectorAll(".sOption").forEach((element) => {
-  element.addEventListener("click", () => {
-    let parent = element.parentElement.parentElement;
-    let val = element.getAttribute("data-value");
-    parent.querySelector("input").value = val;
-    if (!element.classList.contains("Select-Active")) {
-      parent.querySelectorAll(".sOption").forEach((option) => {
-        if (option.classList.contains("Select-Active")) {
-          option.classList.remove("Select-Active");
-        }
-      });
-      element.classList.add("Select-Active");
-    }
-    if (parent.querySelector(".selected-option") !== null) {
-      parent.querySelector(".selected-option").innerHTML =
-        ": " + element.innerHTML;
-    }
-  });
-});
-// Drop Select
-document.querySelectorAll(".dropSelect").forEach((dS) => {
-  dS.addEventListener("click", function () {
-    if (this.classList.contains("Select-Down")) {
-      this.classList.remove("Select-Down");
-      this.querySelector(".select-options").style.opacity = 0;
-      this.querySelector(".select-options").style.display = "none";
-    } else {
-      this.classList.add("Select-Down");
-      this.querySelector(".select-options").style.display = "flex";
-      setTimeout(() => {
-        this.querySelector(".select-options").style.opacity = 1;
-      }, 0);
-    }
-  });
-});
-document.onmouseup = function (e) {
-  let contains = Array.from(document.querySelectorAll(".dropSelect")).some(
-    (el) => el.contains(e.target)
-  );
-  if (!contains) {
-    document.querySelectorAll(".dropSelect").forEach((el) => {
-      if (el.classList.contains("Select-Down")) {
-        el.classList.remove("Select-Down");
-        el.querySelector(".select-options").style.opacity = 0;
-        el.querySelector(".select-options").style.display = "none";
-      }
-    });
-  }
-};
-document.querySelectorAll(".sOption").forEach((sO) => {
-  if (sO.classList.contains("Select-Active")) {
-    let inputValue = sO.dataset.value;
-    let mainParnet = sO.parentNode.parentNode;
-    mainParnet.querySelector("input").value = inputValue;
-    if (mainParnet.querySelector(".selected-option")) {
-      mainParnet.querySelector(".selected-option").innerHTML =
-        ": " + sO.innerHTML;
-    }
-  }
-});
-// Submit inputs (sInput)
-function pendButton(element, disableAll = false) {
-  if (!element.classList.contains("Active")) {
-    element.classList.add("Active");
-    element.querySelector("label").classList.add("label-active");
-  }
-  if (disableAll) {
-    document.querySelectorAll(".sInput").forEach((sI) => {
-      if (!sI.classList.contains("Active")) {
-        sI.classList.add("temporary-disabled");
-      }
-    });
-    document.querySelectorAll(".bInput").forEach((sI) => {
-      if (!sI.classList.contains("Active")) {
-        sI.classList.add("temporary-disabled");
-      }
-    });
-  }
-}
-function resolveButton(element) {
-  if (element.classList.contains("Active")) {
-    element.classList.remove("Active");
-    element.querySelector("label").classList.remove("label-active");
-  }
-
-  const temporaryDisabled = document.querySelectorAll(".temporary-disabled");
-  if (temporaryDisabled.length > 0) {
-    temporaryDisabled.forEach((element) => {
-      element.classList.remove("temporary-disabled");
-    });
-  }
-}
-// .pendOnClick
-document.querySelectorAll(".pendOnClick").forEach(function (element) {
-  element.addEventListener("click", () => {
-    pendButton(element);
-  });
-});
-
-document.querySelectorAll("form").forEach(function (form) {
-  form.addEventListener("submit", function () {
-    pendButton(form.querySelector(".sInput"));
-  });
-});
 
 class FInput {
   constructor(fInput) {
@@ -343,7 +197,63 @@ class FInput {
   }
 }
 
+// tInput
+document.querySelectorAll(".tInput").forEach((tInput) => {
+  new TInput(tInput);
+});
+// cr-Input
+document.querySelectorAll(".cInput").forEach((cInput) => {
+  new CInput(cInput);
+});
+document.querySelectorAll(".rInput").forEach((rInput) => {
+  new RInput(rInput);
+});
 // Input type file
-document.querySelectorAll(".fInput").forEach(function (fInput) {
+document.querySelectorAll(".fInput").forEach((fInput) => {
   new FInput(fInput);
+});
+
+// Submit inputs (sInput)
+function pendButton(element, disableAll = false) {
+  if (!element.classList.contains("Active")) {
+    element.classList.add("Active");
+    element.querySelector("label").classList.add("label-active");
+  }
+  if (disableAll) {
+    document.querySelectorAll(".sInput").forEach((sI) => {
+      if (!sI.classList.contains("Active")) {
+        sI.classList.add("temporary-disabled");
+      }
+    });
+    document.querySelectorAll(".bInput").forEach((sI) => {
+      if (!sI.classList.contains("Active")) {
+        sI.classList.add("temporary-disabled");
+      }
+    });
+  }
+}
+function resolveButton(element) {
+  if (element.classList.contains("Active")) {
+    element.classList.remove("Active");
+    element.querySelector("label").classList.remove("label-active");
+  }
+
+  const temporaryDisabled = document.querySelectorAll(".temporary-disabled");
+  if (temporaryDisabled.length > 0) {
+    temporaryDisabled.forEach((element) => {
+      element.classList.remove("temporary-disabled");
+    });
+  }
+}
+// .pendOnClick
+document.querySelectorAll(".pendOnClick").forEach(function (element) {
+  element.addEventListener("click", () => {
+    pendButton(element);
+  });
+});
+
+document.querySelectorAll("form").forEach(function (form) {
+  form.addEventListener("submit", function () {
+    pendButton(form.querySelector(".sInput"));
+  });
 });
