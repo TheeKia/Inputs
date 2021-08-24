@@ -448,3 +448,42 @@ UPPERCASE classes are handled by JavaScript
 .fInput:hover label {
   background: rgba(50, 50, 50, 0.05);
 }
+
+.fI-expand {
+  font-family: monospace;
+}
+
+.fI-expand > p {
+  position: relative;
+  padding: 0.5em 0.3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.fI-expand > p .fI-detail {
+  position: absolute;
+  right: 0.3em;
+  top: 50%;
+  padding: 1px 2px;
+  background: #ecf0f3;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  line-height: normal;
+  border-radius: 2px;
+  border: 1px solid rgba(50, 50, 50, 0.3);
+  color: #555;
+}
+
+.fI-expand > p:nth-child(even) {
+  background: rgba(50, 50, 50, 0.1);
+}

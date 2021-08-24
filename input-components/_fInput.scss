@@ -50,3 +50,32 @@
     }
   }
 }
+
+.fI-expand {
+  font-family: monospace;
+  & > p {
+    position: relative;
+    padding: 0.5em 0.3em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    .fI-detail {
+      position: absolute;
+      right: 0.3em;
+      top: 50%;
+      padding: 1px 2px;
+      background: $bg-color;
+      transform: translateY(-50%);
+      line-height: normal;
+      border-radius: $inputs-border-radius;
+      border: 1px solid rgba(50, 50, 50, 0.3);
+      color: #555;
+    }
+    &:nth-child(even) {
+      background: rgba(50, 50, 50, 0.1);
+    }
+  }
+}

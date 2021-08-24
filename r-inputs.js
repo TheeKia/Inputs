@@ -245,6 +245,16 @@ class FInput {
 
     this.defaultLabel = this.label.innerHTML;
     this.initiate();
+
+    if (this.fInput.dataset.expand) {
+      this.expand = true;
+      this.expandElement = document.getElementById(this.fInput.dataset.expand);
+      this.expandElement.classList.add("fI-expand");
+      this.expandElement.innerHTML = "";
+    } else {
+      this.expand = false;
+      this.expandElement = null;
+    }
   }
 
   initiate() {
@@ -252,7 +262,7 @@ class FInput {
       let files = this.input.files;
 
       if (files.length > 1) {
-        // Multiple files
+        // Multiple files selected
         this.activate();
 
         let totalSize = 0;
@@ -261,24 +271,51 @@ class FInput {
         }
         totalSize = this.formatSize(totalSize);
 
-        this.label.innerHTML = `${files.length} files<p class='fI-detail'>${totalSize}</p>`;
+        this.label.innerHTML = `${files.length} files <span class='fI-detail'>${totalSize}</span>`;
+
+        if (this.expand) {
+          for (let file of files) {
+            let p = document.createElement("p");
+            let size = this.formatSize(file.size);
+            p.innerHTML = `${file.name} <span class='fI-detail'>${size}</span>`;
+            this.expandElement.appendChild(p);
+          }
+        }
       } else if (files.length === 1) {
-        // One file
+        // One file selected
         this.activate();
 
-        // Name handling
-        let name = files[0].name;
-        this.label.title = name;
-        if (name.length > 25) {
-          name = name.slice(0, 16) + "..." + name.slice(name.length - 6);
-        }
+        let originalName = files[0].name;
         // Size handling
         let size = this.formatSize(files[0].size);
-        this.label.innerHTML = `${name}<p class='fI-detail'>${size}</p>`;
+
+        if (this.expand) {
+          let p = document.createElement("p");
+          p.innerHTML = `${originalName} <span class='fI-detail'>${size}</span>`;
+          this.expandElement.innerHTML = "";
+          this.expandElement.appendChild(p);
+
+          this.label.innerHTML = `1 file <span class='fI-detail'>${size}</span>`;
+        } else {
+          // Short name handling
+          let name = "";
+          this.label.title = originalName;
+          if (originalName.length > 25) {
+            name =
+              originalName.slice(0, 16) +
+              "..." +
+              originalName.slice(name.length - 6);
+          }
+
+          this.label.innerHTML = `${name} <span class='fI-detail'>${size}</span>`;
+        }
       } else {
         // Nothing selected
         this.deactivate();
         this.label.innerHTML = this.defaultLabel;
+        if (this.expand) {
+          this.expandElement.innerHTML = "";
+        }
       }
     });
   }

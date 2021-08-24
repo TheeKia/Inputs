@@ -15,8 +15,6 @@
 </p>
 ```
 
-JavaScript
-
 ```javascript
 document.querySelectorAll(".tInput").forEach((tInput) => {
   new TInput(tInput);
@@ -27,7 +25,7 @@ document.querySelectorAll(".tInput").forEach((tInput) => {
 
 - To disable input, simply add `disabled` to `<input>`
 
-Checkbox
+### Checkbox
 
 ```html
 <div class="cInput">
@@ -36,15 +34,13 @@ Checkbox
 </div>
 ```
 
-JavaScript
-
 ```javascript
 document.querySelectorAll(".cInput").forEach((cInput) => {
   new CInput(cInput);
 });
 ```
 
-Radio
+### Radio
 
 ```html
 <div class="rInput">
@@ -52,8 +48,6 @@ Radio
   <label for="ID"><span class="label">The label</span></label>
 </div>
 ```
-
-JavaScript
 
 ```javascript
 document.querySelectorAll(".rInput").forEach((rInput) => {
@@ -70,10 +64,18 @@ document.querySelectorAll(".rInput").forEach((rInput) => {
 </p>
 ```
 
-JavaScript
-
 ```javascript
 document.querySelectorAll(".fInput").forEach((fInput) => {
   new FInput(fInput);
 });
+```
+
+### Expanded version of File Input
+
+1. In **multiple** file select mode, `data-expand="ELEMENT-ID"` attribute can be added to `.fInput` for showing selected files in detail. _(optional)_
+
+2. Then create the target element
+
+```html
+<p id="ELEMENT-ID"></p>
 ```
