@@ -1,0 +1,91 @@
+@keyframes drs-pending {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(10);
+  }
+}
+.bInput {
+  display: inline-flex;
+  min-width: max-content;
+  user-select: none;
+  border-radius: $inputs-border-radius;
+  overflow: hidden;
+  label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    height: $inputs-height;
+    padding: 0 1em 0 0.8em;
+    border: 1px dashed $inputs-border-color;
+    transition: all 0.1s ease-in-out;
+    &::before {
+      content: attr(data-icon);
+      font-family: "Material Icons", "Material Icons Outlined",
+        "Material Icons Round", "Material Icons Sharp",
+        "Material Icons Two Tone";
+      margin: 0 0.2em 0 0;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, 100%) scale(0.5);
+      width: $inputs-height;
+      height: $inputs-height;
+      opacity: 0;
+      background: rgba(50, 50, 50, 0.2);
+      border-radius: 50%;
+      z-index: -1;
+    }
+  }
+  input,
+  button {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+
+    &:focus + label {
+      border-color: $inputs-border-active-color;
+    }
+    &:active + label {
+      background: rgba(50, 50, 50, 0.2);
+    }
+  }
+
+  &.PENDING {
+    pointer-events: none;
+    label {
+      color: #555;
+      overflow: hidden;
+      &::after {
+        animation: drs-pending 2s ease-in-out infinite;
+      }
+    }
+  }
+
+  &:hover {
+    label {
+      background: rgba(50, 50, 50, 0.05);
+    }
+  }
+
+  &.rtlI {
+    label {
+      flex-direction: row-reverse;
+      &::before {
+        margin: 0 0 0 0.2em;
+      }
+    }
+  }
+}

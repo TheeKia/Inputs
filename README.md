@@ -79,3 +79,45 @@ document.querySelectorAll(".fInput").forEach((fInput) => {
 ```html
 <p id="ELEMENT-ID"></p>
 ```
+
+## Button Input
+
+### Button Class
+
+#### BInput properties
+
+- `this.type` set to either `input` or `button` depending on element type.
+- `this.input` set to either `<input>` or `<button>` element. depending on element type.
+
+#### BInput methods
+
+- `this.onClick(function, pend=false)`
+  - Pass the custom function to run on click.
+  - Set `pend` to `true` to active PENDING mode on click. Unpend it by calling `this.unpend()`.
+
+#### BInput Usage
+
+- Add `.clickPend` class to `bInput` for activating PENDING mode on click.
+
+Using `<input>`:
+
+```html
+<div class="bInput">
+  <input id="ID" type="" value="value" />
+  <label for="ID" data-icon="">Submit</label>
+</div>
+```
+
+Using `<button>`:
+
+```html
+<div class="bInput">
+  <button id="ID" type=""></button>
+  <label for="ID" data-icon="">Reset</label>
+</div>
+```
+
+## Todo
+
+- [ ] `sendRequest` function on buttons
+- [ ] mixins

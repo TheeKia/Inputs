@@ -31,7 +31,7 @@
 </head>
 
 <body style="display: grid;width: 100%;height: 100vh;grid-template-columns: 1;grid-template-rows: 2;">
-  <form style="grid-column-start: 1;grid-column-end: 2;grid-row-start: 1;grid-row-end: 2;">
+  <section style="grid-column-start: 1;grid-column-end: 2;grid-row-start: 1;grid-row-end: 2;">
 
     <div class="wrapper">
 
@@ -75,16 +75,16 @@
         <label for="R2"><span class="label">The label 2</span></label>
       </p>
 
-      <div class="sInput">
+      <div class="bInput">
         <input type="submit" id="sb" value="submit">
         <label for="sb" data-icon="upload">Submit</label>
       </div>
       <div class="bInput">
-        <input type="submit" id="bi" value="reset">
-        <label for="bi">Reset</label>
+        <button id="bi" type="button"></button>
+        <label for="bi" data-icon="settings">Reset</label>
       </div>
     </div>
-  </form>
+  </section>
 
   <!-- DARK -->
   <section class="tDark"
@@ -118,7 +118,7 @@
         <label for="R2d"><span class="label">The label 2</span></label>
       </div>
 
-      <div class="sInput" style="margin-right: 1em;">
+      <div class="bInput">
         <input type="submit" id="sbd" value="submit">
         <label for="sbd">Submit</label>
       </div>

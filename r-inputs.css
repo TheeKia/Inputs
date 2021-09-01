@@ -297,7 +297,6 @@ UPPERCASE classes are handled by JavaScript
 
 .cInput input,
 .rInput input {
-  visibility: hidden;
   opacity: 0;
   position: absolute;
   pointer-events: none;
@@ -408,7 +407,7 @@ UPPERCASE classes are handled by JavaScript
   line-height: 36px;
   padding: 0 10px;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px dashed #ccc;
   font-size: 0.92em;
   overflow: hidden;
   font-family: monospace;
@@ -436,13 +435,16 @@ UPPERCASE classes are handled by JavaScript
 
 .fInput input {
   opacity: 0;
-  visibility: 0;
   pointer-events: none;
   position: absolute;
 }
 
-.fInput.active label {
+.fInput input:focus + label {
   border-color: #777;
+}
+
+.fInput.active label {
+  border-style: solid;
 }
 
 .fInput:hover label {
@@ -486,4 +488,141 @@ UPPERCASE classes are handled by JavaScript
 
 .fI-expand > p:nth-child(even) {
   background: rgba(50, 50, 50, 0.1);
+}
+
+@-webkit-keyframes drs-pending {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, 0) scale(0.5);
+            transform: translate(-50%, 0) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(0.5);
+            transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%) scale(10);
+            transform: translate(-50%, -50%) scale(10);
+  }
+}
+
+@keyframes drs-pending {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, 0) scale(0.5);
+            transform: translate(-50%, 0) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(0.5);
+            transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%) scale(10);
+            transform: translate(-50%, -50%) scale(10);
+  }
+}
+
+.bInput {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bInput label {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  cursor: pointer;
+  height: 36px;
+  padding: 0 1em 0 0.8em;
+  border: 1px dashed #ccc;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+.bInput label::before {
+  content: attr(data-icon);
+  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
+  margin: 0 0.2em 0 0;
+}
+
+.bInput label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, 100%) scale(0.5);
+          transform: translate(-50%, 100%) scale(0.5);
+  width: 36px;
+  height: 36px;
+  opacity: 0;
+  background: rgba(50, 50, 50, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.bInput input,
+.bInput button {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.bInput input:focus + label,
+.bInput button:focus + label {
+  border-color: #777;
+}
+
+.bInput input:active + label,
+.bInput button:active + label {
+  background: rgba(50, 50, 50, 0.2);
+}
+
+.bInput.PENDING {
+  pointer-events: none;
+}
+
+.bInput.PENDING label {
+  color: #555;
+  overflow: hidden;
+}
+
+.bInput.PENDING label::after {
+  -webkit-animation: drs-pending 2s ease-in-out infinite;
+          animation: drs-pending 2s ease-in-out infinite;
+}
+
+.bInput:hover label {
+  background: rgba(50, 50, 50, 0.05);
+}
+
+.bInput.rtlI label {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.bInput.rtlI label::before {
+  margin: 0 0 0 0.2em;
 }

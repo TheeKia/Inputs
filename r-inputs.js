@@ -115,6 +115,8 @@ class FInput {
     this.input.addEventListener("input", () => {
       let files = this.input.files;
 
+      this.expandElement.innerHTML = "";
+
       if (files.length > 1) {
         // Multiple files selected
         this.activate();
@@ -197,6 +199,44 @@ class FInput {
   }
 }
 
+class BInput {
+  constructor(bInput) {
+    this.bInput = bInput;
+    if (bInput.querySelector("input")) {
+      this.type = "input";
+      this.input = bInput.querySelector("input");
+    } else {
+      this.type = "button";
+      this.input = bInput.querySelector("button");
+    }
+    this.label = bInput.querySelector("label");
+
+    if (this.bInput.classList.contains("clickPend")) {
+      this.input.addEventListener("click", () => {
+        this.pend();
+      });
+    }
+  }
+
+  pend() {
+    this.bInput.classList.add("PENDING");
+    this.input.disabled = true;
+    return this;
+  }
+  unpend() {
+    this.bInput.classList.remove("PENDING");
+    this.input.disabled = false;
+    return this;
+  }
+  onClick(fn, pend = false) {
+    this.input.addEventListener("click", () => {
+      if (pend) this.pend();
+      fn();
+    });
+    return this;
+  }
+}
+
 // tInput
 document.querySelectorAll(".tInput").forEach((tInput) => {
   new TInput(tInput);
@@ -212,7 +252,12 @@ document.querySelectorAll(".rInput").forEach((rInput) => {
 document.querySelectorAll(".fInput").forEach((fInput) => {
   new FInput(fInput);
 });
+// Input type button
+document.querySelectorAll(".bInput").forEach((bInput) => {
+  new BInput(bInput);
+});
 
+/*
 // Submit inputs (sInput)
 function pendButton(element, disableAll = false) {
   if (!element.classList.contains("Active")) {
@@ -232,28 +277,10 @@ function pendButton(element, disableAll = false) {
     });
   }
 }
-function resolveButton(element) {
-  if (element.classList.contains("Active")) {
-    element.classList.remove("Active");
-    element.querySelector("label").classList.remove("label-active");
-  }
-
-  const temporaryDisabled = document.querySelectorAll(".temporary-disabled");
-  if (temporaryDisabled.length > 0) {
-    temporaryDisabled.forEach((element) => {
-      element.classList.remove("temporary-disabled");
-    });
-  }
-}
-// .pendOnClick
-document.querySelectorAll(".pendOnClick").forEach(function (element) {
-  element.addEventListener("click", () => {
-    pendButton(element);
-  });
-});
 
 document.querySelectorAll("form").forEach(function (form) {
   form.addEventListener("submit", function () {
     pendButton(form.querySelector(".sInput"));
   });
 });
+*/
