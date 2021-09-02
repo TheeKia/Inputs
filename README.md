@@ -103,14 +103,17 @@ document.querySelectorAll(".fInput").forEach((fInput) => {
 
 #### BInput methods
 
-- `this.onClick(function, pend=false)`
+- Method `this.onClick(function, pend=false)`
 
   - Pass the custom function to run on click.
   - Set `pend` to `true` to active PENDING mode on click. Unpend it by calling `this.unpend()`.
 
-- `this.fetch(url, method = "GET", data = {}, contentType = "application/json")`
+- Method `this.fetch(url, method = "GET", data = {}, contentType = "application/json")`
 
   - Returns the promise
+
+- Method `this.progress(tenths)`
+  - Shows the loading on the button
 
 ##### bInput.fetch() Use example
 

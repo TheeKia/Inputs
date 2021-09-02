@@ -89,6 +89,10 @@ class RInput {
     this.input = rInput.querySelector("input");
     this.label = rInput.querySelector("label");
 
+    if (!this.rInput.classList.contains("rInput")) {
+      this.rInput.classList.add("rInput");
+    }
+
     this.createLabelBox();
   }
 
@@ -127,7 +131,9 @@ class FInput {
     this.input.addEventListener("input", () => {
       let files = this.input.files;
 
-      this.expandElement.innerHTML = "";
+      if (this.expand) {
+        this.expandElement.innerHTML = "";
+      }
 
       if (files.length > 1) {
         // Multiple files selected
@@ -173,6 +179,8 @@ class FInput {
               originalName.slice(0, 16) +
               "..." +
               originalName.slice(name.length - 6);
+          } else {
+            name = originalName;
           }
 
           this.label.innerHTML = `${name} <span class='fI-detail'>${size}</span>`;
@@ -223,6 +231,8 @@ class BInput {
     }
     this.label = bInput.querySelector("label");
 
+    this.isProgressSet = false;
+
     if (!this.bInput.classList.contains("bInput")) {
       this.bInput.classList.add("bInput");
     }
@@ -244,6 +254,25 @@ class BInput {
     this.input.disabled = false;
     return this;
   }
+
+  progress(tenths) {
+    if (tenths !== false) {
+      if (this.isProgressSet === false) {
+        this.progressElement = document.createElement("div");
+        this.progressElement.setAttribute("class", "bInput-progressbar");
+        this.label.appendChild(this.progressElement);
+        this.isProgressSet = true;
+      }
+      this.progressElement.style.transform = `scaleX(${tenths})`;
+    } else {
+      if (this.isProgressSet === true) {
+        this.isProgressSet = false;
+        this.progressElement.remove();
+      }
+      this.unpend();
+    }
+  }
+
   setStatus(status) {
     if (status != "success" && status != "fail") {
       console.log(`Wrong status code. ${status} status code does not exists.`);
