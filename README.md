@@ -174,5 +174,5 @@ document.querySelectorAll(".bInput").forEach((bInput) => {
 
 ## Todo
 
-- [ ] `sendRequest` function on buttons
-- [ ] mixins
+- [x] `fetch` function on buttons
+- [x] mixins
