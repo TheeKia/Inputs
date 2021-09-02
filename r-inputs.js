@@ -228,6 +228,21 @@ class BInput {
     this.input.disabled = false;
     return this;
   }
+  setStatus(status) {
+    if (status != "success" && status != "fail") {
+      console.log(`Wrong status code. ${status} status code does not exists.`);
+      return;
+    }
+    status = status.toUpperCase();
+    this.bInput.classList.remove("PENDING");
+    this.bInput.classList.add(status);
+    setTimeout(() => {
+      this.bInput.classList.remove(status);
+      this.input.disabled = false;
+    }, 1000);
+    return this;
+  }
+
   onClick(fn, pend = false) {
     this.input.addEventListener("click", () => {
       if (pend) this.pend();
@@ -235,52 +250,29 @@ class BInput {
     });
     return this;
   }
-}
-
-// tInput
-document.querySelectorAll(".tInput").forEach((tInput) => {
-  new TInput(tInput);
-});
-// cr-Input
-document.querySelectorAll(".cInput").forEach((cInput) => {
-  new CInput(cInput);
-});
-document.querySelectorAll(".rInput").forEach((rInput) => {
-  new RInput(rInput);
-});
-// Input type file
-document.querySelectorAll(".fInput").forEach((fInput) => {
-  new FInput(fInput);
-});
-// Input type button
-document.querySelectorAll(".bInput").forEach((bInput) => {
-  new BInput(bInput);
-});
-
-/*
-// Submit inputs (sInput)
-function pendButton(element, disableAll = false) {
-  if (!element.classList.contains("Active")) {
-    element.classList.add("Active");
-    element.querySelector("label").classList.add("label-active");
-  }
-  if (disableAll) {
-    document.querySelectorAll(".sInput").forEach((sI) => {
-      if (!sI.classList.contains("Active")) {
-        sI.classList.add("temporary-disabled");
-      }
-    });
-    document.querySelectorAll(".bInput").forEach((sI) => {
-      if (!sI.classList.contains("Active")) {
-        sI.classList.add("temporary-disabled");
-      }
-    });
+  async fetch(
+    url,
+    method = "GET",
+    data = {},
+    contentType = "application/json"
+  ) {
+    if (method === "GET" || method === "HEAD") {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": contentType,
+        },
+      });
+      return response;
+    } else {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": contentType,
+        },
+        body: JSON.stringify(data),
+      });
+      return response;
+    }
   }
 }
-
-document.querySelectorAll("form").forEach(function (form) {
-  form.addEventListener("submit", function () {
-    pendButton(form.querySelector(".sInput"));
-  });
-});
-*/

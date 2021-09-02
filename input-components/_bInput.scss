@@ -28,13 +28,8 @@
     padding: 0 1em 0 0.8em;
     border: 1px dashed $inputs-border-color;
     transition: all 0.1s ease-in-out;
-    &::before {
-      content: attr(data-icon);
-      font-family: "Material Icons", "Material Icons Outlined",
-        "Material Icons Round", "Material Icons Sharp",
-        "Material Icons Two Tone";
-      margin: 0 0.2em 0 0;
-    }
+    overflow: hidden;
+    @include icon-before;
     &::after {
       content: "";
       position: absolute;
@@ -47,6 +42,9 @@
       background: rgba(50, 50, 50, 0.2);
       border-radius: 50%;
       z-index: -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
   input,
@@ -58,24 +56,56 @@
     &:focus + label {
       border-color: $inputs-border-active-color;
     }
-    &:active + label {
+    &:active:not(:disabled) + label {
       background: rgba(50, 50, 50, 0.2);
+    }
+    &:disabled {
+      pointer-events: none;
+      & + label {
+        color: #888;
+        cursor: default;
+      }
     }
   }
 
   &.PENDING {
-    pointer-events: none;
     label {
       color: #555;
-      overflow: hidden;
       &::after {
-        animation: drs-pending 2s ease-in-out infinite;
+        animation: drs-pending 2s ease-in infinite;
+      }
+    }
+  }
+  &.SUCCESS {
+    input,
+    button {
+      &:disabled + label {
+        color: #222;
+        border-color: #69b969;
+        &::after {
+          background: #69b969;
+          animation: drs-pending 2s ease-in forwards;
+        }
+      }
+    }
+  }
+  &.FAIL {
+    input,
+    button {
+      &:disabled + label {
+        color: #222;
+        border-color: #ff5151;
+        &::after {
+          background: #ff5151;
+          animation: drs-pending 2s ease-in-out forwards;
+        }
       }
     }
   }
 
   &:hover {
-    label {
+    input:not(:disabled) + label,
+    button:not(:disabled) + label {
       background: rgba(50, 50, 50, 0.05);
     }
   }

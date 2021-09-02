@@ -1,6 +1,16 @@
 # Inputs
 
-`data-icon` attribute is using [Material Icons](https://fonts.google.com/icons "Material icons reference")
+- `data-icon` attribute is using [Material Icons](https://fonts.google.com/icons "Material icons reference")
+- How to use:
+
+  1. Add this code to `<head>` tag.
+
+     ```html
+     <script src="r-inputs.js"></script>
+     <link rel="stylesheet" href="r-inputs.css" />
+     ```
+
+  2. Create instences of the class for each input.
 
 ## Text Input
 
@@ -11,7 +21,7 @@
 ```html
 <p class="tInput">
   <input type="text" id="ID" name="" placeholder="" />
-  <label for="ID" data-icon="">The label</label>
+  <label for="ID" data-icon="">LABEL</label>
 </p>
 ```
 
@@ -30,7 +40,7 @@ document.querySelectorAll(".tInput").forEach((tInput) => {
 ```html
 <div class="cInput">
   <input type="checkbox" name="" id="ID" />
-  <label for="ID"><span class="label">The label</span></label>
+  <label for="ID"><span class="label">LABEL</span></label>
 </div>
 ```
 
@@ -45,7 +55,7 @@ document.querySelectorAll(".cInput").forEach((cInput) => {
 ```html
 <div class="rInput">
   <input type="radio" id="ID" name="" />
-  <label for="ID"><span class="label">The label</span></label>
+  <label for="ID"><span class="label">LABEL</span></label>
 </div>
 ```
 
@@ -92,29 +102,69 @@ document.querySelectorAll(".fInput").forEach((fInput) => {
 #### BInput methods
 
 - `this.onClick(function, pend=false)`
+
   - Pass the custom function to run on click.
   - Set `pend` to `true` to active PENDING mode on click. Unpend it by calling `this.unpend()`.
+
+- `this.fetch(url, method = "GET", data = {}, contentType = "application/json")`
+
+  - Returns the promise
+
+##### bInput.fetch() Use example
+
+```javascript
+let button = new BInput(bInput);
+button.onClick(() => {
+  button
+    .fetch("https://reqres.in/api/register", "POST", {
+      email: "eve.holt@reqres.in",
+      password: "pistol",
+    })
+    .then((response) => {
+      if (response.ok && response.status === 200) {
+        button.setStatus("success");
+        return response.json();
+      } else {
+        button.setStatus("fail");
+        return response.json();
+      }
+    })
+    .then((result) => {
+      // Result
+    })
+    .catch((err) => {
+      button.setStatus("fail");
+      // Error handling
+    });
+}, true);
+```
 
 #### BInput Usage
 
 - Add `.clickPend` class to `bInput` for activating PENDING mode on click.
 
-Using `<input>`:
+- Using `<input>`:
 
-```html
-<div class="bInput">
-  <input id="ID" type="" value="value" />
-  <label for="ID" data-icon="">Submit</label>
-</div>
-```
+  ```html
+  <div class="bInput">
+    <input id="ID" type="" value="" />
+    <label for="ID" data-icon="">LABEL</label>
+  </div>
+  ```
 
-Using `<button>`:
+- Using `<button>`:
 
-```html
-<div class="bInput">
-  <button id="ID" type=""></button>
-  <label for="ID" data-icon="">Reset</label>
-</div>
+  ```html
+  <div class="bInput">
+    <button id="ID" type=""></button>
+    <label for="ID" data-icon="">LABEL</label>
+  </div>
+  ```
+
+```javascript
+document.querySelectorAll(".bInput").forEach((bInput) => {
+  new BInput(bInput);
+});
 ```
 
 ## Todo

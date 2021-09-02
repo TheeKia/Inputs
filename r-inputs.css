@@ -88,7 +88,7 @@ UPPERCASE classes are handled by JavaScript
 
 .tInput label::before {
   content: attr(data-icon);
-  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
+  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
   margin: 0 0.2em 0 0;
 }
 
@@ -395,6 +395,7 @@ UPPERCASE classes are handled by JavaScript
   display: -ms-inline-flexbox;
   display: inline-flex;
   width: 250px;
+  height: 36px;
 }
 
 .fInput label {
@@ -416,7 +417,7 @@ UPPERCASE classes are handled by JavaScript
 
 .fInput label::before {
   content: attr(data-icon);
-  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
+  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
   margin: 0 0.2em 0 0;
 }
 
@@ -558,11 +559,12 @@ UPPERCASE classes are handled by JavaScript
   border: 1px dashed #ccc;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
+  overflow: hidden;
 }
 
 .bInput label::before {
   content: attr(data-icon);
-  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
+  font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
   margin: 0 0.2em 0 0;
 }
 
@@ -579,6 +581,15 @@ UPPERCASE classes are handled by JavaScript
   background: rgba(50, 50, 50, 0.2);
   border-radius: 50%;
   z-index: -1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .bInput input,
@@ -593,26 +604,59 @@ UPPERCASE classes are handled by JavaScript
   border-color: #777;
 }
 
-.bInput input:active + label,
-.bInput button:active + label {
+.bInput input:active:not(:disabled) + label,
+.bInput button:active:not(:disabled) + label {
   background: rgba(50, 50, 50, 0.2);
 }
 
-.bInput.PENDING {
+.bInput input:disabled,
+.bInput button:disabled {
   pointer-events: none;
+}
+
+.bInput input:disabled + label,
+.bInput button:disabled + label {
+  color: #888;
+  cursor: default;
 }
 
 .bInput.PENDING label {
   color: #555;
-  overflow: hidden;
 }
 
 .bInput.PENDING label::after {
-  -webkit-animation: drs-pending 2s ease-in-out infinite;
-          animation: drs-pending 2s ease-in-out infinite;
+  -webkit-animation: drs-pending 2s ease-in infinite;
+          animation: drs-pending 2s ease-in infinite;
 }
 
-.bInput:hover label {
+.bInput.SUCCESS input:disabled + label,
+.bInput.SUCCESS button:disabled + label {
+  color: #222;
+  border-color: #69b969;
+}
+
+.bInput.SUCCESS input:disabled + label::after,
+.bInput.SUCCESS button:disabled + label::after {
+  background: #69b969;
+  -webkit-animation: drs-pending 2s ease-in forwards;
+          animation: drs-pending 2s ease-in forwards;
+}
+
+.bInput.FAIL input:disabled + label,
+.bInput.FAIL button:disabled + label {
+  color: #222;
+  border-color: #ff5151;
+}
+
+.bInput.FAIL input:disabled + label::after,
+.bInput.FAIL button:disabled + label::after {
+  background: #ff5151;
+  -webkit-animation: drs-pending 2s ease-in-out forwards;
+          animation: drs-pending 2s ease-in-out forwards;
+}
+
+.bInput:hover input:not(:disabled) + label,
+.bInput:hover button:not(:disabled) + label {
   background: rgba(50, 50, 50, 0.05);
 }
 

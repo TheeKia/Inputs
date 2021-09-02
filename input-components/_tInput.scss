@@ -24,13 +24,7 @@
     min-width: max-content;
     cursor: text;
     color: #555;
-    &::before {
-      content: attr(data-icon);
-      font-family: "Material Icons", "Material Icons Outlined",
-        "Material Icons Round", "Material Icons Sharp",
-        "Material Icons Two Tone";
-      margin: 0 0.2em 0 0;
-    }
+    @include icon-before;
   }
 
   input {
