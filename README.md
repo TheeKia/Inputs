@@ -8,8 +8,8 @@ Check [Demo](https://drastraa.github.io/Inputs/).
   1. Add this code to `<head>` tag.
 
      ```html
-     <script src="r-inputs.js"></script>
-     <link rel="stylesheet" href="r-inputs.css" />
+     <script src="js/r-inputs.js"></script>
+     <link rel="stylesheet" href="css/r-inputs.css" />
      ```
 
   2. Create instences of the class for each input.

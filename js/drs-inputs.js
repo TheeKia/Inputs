@@ -4,6 +4,10 @@ class TInput {
     this.input = tInput.querySelector("input");
     this.label = tInput.querySelector("label");
 
+    if (!this.tInput.classList.contains("tInput")) {
+      this.tInput.classList.add("tInput");
+    }
+
     if (!this.input) {
       console.warn("Something went wrong in Input Class", tInput);
       return;
@@ -65,6 +69,10 @@ class CInput {
     this.input = cInput.querySelector("input");
     this.label = cInput.querySelector("label");
 
+    if (!this.cInput.classList.contains("cInput")) {
+      this.cInput.classList.add("cInput");
+    }
+
     this.createLabelBox();
   }
   createLabelBox() {
@@ -96,6 +104,10 @@ class FInput {
     this.fInput = fInput;
     this.input = fInput.querySelector("input");
     this.label = fInput.querySelector("label");
+
+    if (!this.fInput.classList.contains("fInput")) {
+      this.fInput.classList.add("fInput");
+    }
 
     this.defaultLabel = this.label.innerHTML;
     this.initiate();
@@ -210,6 +222,10 @@ class BInput {
       this.input = bInput.querySelector("button");
     }
     this.label = bInput.querySelector("label");
+
+    if (!this.bInput.classList.contains("bInput")) {
+      this.bInput.classList.add("bInput");
+    }
 
     if (this.bInput.classList.contains("clickPend")) {
       this.input.addEventListener("click", () => {
