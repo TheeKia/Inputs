@@ -1,5 +1,7 @@
 # Inputs
 
+Check [Demo](https://drastraa.github.io/Inputs)
+
 - `data-icon` attribute is using [Material Icons](https://fonts.google.com/icons "Material icons reference")
 - How to use:
 
