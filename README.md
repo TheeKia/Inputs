@@ -148,6 +148,10 @@ button.onClick(() => {
 
 - Add `.clickPend` class to `bInput` for activating PENDING mode on click.
 
+- Buttons can be assigned with **Only Icon**. (automatic)
+
+  - This can be done manually by adding `drs-bInput--IconOnly` to the `.bInput`.
+
 - Using `<input>`:
 
   ```html
@@ -176,3 +180,4 @@ document.querySelectorAll(".bInput").forEach((bInput) => {
 
 - [x] `fetch` function on buttons
 - [x] mixins
+- [x] Only-Icon button

@@ -51,6 +51,7 @@ $inputs-height: 36px;
     content: attr(data-icon);
     @include icons-font;
     margin: 0 0.2em 0 0;
+    height: 1em;
   }
 }
 

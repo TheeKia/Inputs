@@ -128,4 +128,15 @@
       }
     }
   }
+  &.drs-bInput--IconOnly {
+    min-width: $inputs-height;
+    width: $inputs-height;
+    height: $inputs-height;
+    label {
+      padding: 0;
+      &::before {
+        transform: scale(1.2);
+      }
+    }
+  }
 }

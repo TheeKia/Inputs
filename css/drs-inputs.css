@@ -75,10 +75,10 @@ UPPERCASE classes are handled by JavaScript
 
 .tInput label {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
-  -webkit-transform: translateY(50%);
-          transform: translateY(50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
@@ -90,6 +90,7 @@ UPPERCASE classes are handled by JavaScript
   content: attr(data-icon);
   font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
   margin: 0 0.2em 0 0;
+  height: 1em;
 }
 
 .tInput input {
@@ -150,7 +151,7 @@ UPPERCASE classes are handled by JavaScript
 }
 
 .tInput.ACTIVE label {
-  top: -20px;
+  top: 0;
   left: 5px;
   padding: 0 5px;
   font-size: 0.9em;
@@ -419,6 +420,7 @@ UPPERCASE classes are handled by JavaScript
   content: attr(data-icon);
   font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
   margin: 0 0.2em 0 0;
+  height: 1em;
 }
 
 .fInput label .fI-detail {
@@ -567,6 +569,7 @@ UPPERCASE classes are handled by JavaScript
   content: attr(data-icon);
   font-family: "Material Icons", "Material Icons Outlined", "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
   margin: 0 0.2em 0 0;
+  height: 1em;
 }
 
 .bInput label::after {
@@ -681,4 +684,19 @@ UPPERCASE classes are handled by JavaScript
 
 .bInput.rtlI label::before {
   margin: 0 0 0 0.2em;
+}
+
+.bInput.drs-bInput--IconOnly {
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+.bInput.drs-bInput--IconOnly label {
+  padding: 0;
+}
+
+.bInput.drs-bInput--IconOnly label::before {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }

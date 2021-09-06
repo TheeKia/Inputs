@@ -236,6 +236,13 @@ class BInput {
     if (!this.bInput.classList.contains("bInput")) {
       this.bInput.classList.add("bInput");
     }
+    if (
+      this.label.innerHTML === "" &&
+      this.label.dataset.icon.length > 0 &&
+      !this.bInput.classList.contains("drs-bInput--IconOnly")
+    ) {
+      this.bInput.classList.add("drs-bInput--IconOnly");
+    }
 
     if (this.bInput.classList.contains("clickPend")) {
       this.input.addEventListener("click", () => {

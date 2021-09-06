@@ -18,9 +18,9 @@
 
   label {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
-    transform: translateY(50%);
+    transform: translateY(-50%);
     min-width: max-content;
     cursor: text;
     color: #555;
@@ -69,7 +69,7 @@
 
   &.ACTIVE {
     label {
-      top: -20px;
+      top: 0;
       left: 5px;
       padding: 0 5px;
       font-size: 0.9em;
