@@ -29,19 +29,6 @@ $inputs-height: 36px;
   }
 }
 
-.flat-left,
-.flat-left label,
-.flat-left input {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.flat-right,
-.flat-right label,
-.flat-right input {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 @mixin icons-font {
   font-family: "Material Icons", "Material Icons Outlined",
     "Material Icons Round", "Material Icons Sharp", "Material Icons Two Tone";
@@ -59,3 +46,24 @@ $inputs-height: 36px;
 @import "input-components/crInput";
 @import "input-components/fInput";
 @import "input-components/bInput";
+
+.flat-left,
+.flat-left label,
+.flat-left input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.flat-right,
+.flat-right label,
+.flat-right input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tInput,
+.fInput,
+.bInput,
+.cInput,
+.rInput {
+  margin-top: 12px;
+}

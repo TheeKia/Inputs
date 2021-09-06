@@ -29,24 +29,9 @@ UPPERCASE classes are handled by JavaScript
   }
 }
 
-.flat-left,
-.flat-left label,
-.flat-left input {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.flat-right,
-.flat-right label,
-.flat-right input {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 .tInput {
   position: relative;
   height: 36px;
-  margin-top: 12px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -151,7 +136,7 @@ UPPERCASE classes are handled by JavaScript
 }
 
 .tInput.ACTIVE label {
-  top: 0;
+  top: -2px;
   left: 5px;
   padding: 0 5px;
   font-size: 0.9em;
@@ -699,4 +684,27 @@ UPPERCASE classes are handled by JavaScript
 .bInput.drs-bInput--IconOnly label::before {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
+  margin: 0;
+}
+
+.flat-left,
+.flat-left label,
+.flat-left input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.flat-right,
+.flat-right label,
+.flat-right input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tInput,
+.fInput,
+.bInput,
+.cInput,
+.rInput {
+  margin-top: 12px;
 }

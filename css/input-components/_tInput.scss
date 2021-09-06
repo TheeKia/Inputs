@@ -1,7 +1,6 @@
 .tInput {
   position: relative;
   height: $inputs-height;
-  margin-top: 12px;
   display: inline-flex;
   width: max-content;
 
@@ -69,7 +68,7 @@
 
   &.ACTIVE {
     label {
-      top: 0;
+      top: -2px;
       left: 5px;
       padding: 0 5px;
       font-size: 0.9em;
