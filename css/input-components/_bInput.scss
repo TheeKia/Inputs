@@ -16,7 +16,7 @@
   display: inline-flex;
   min-width: max-content;
   user-select: none;
-  border-radius: $inputs-border-radius;
+  border-radius: $drs-border-radius;
   overflow: hidden;
   label {
     width: 100%;
@@ -25,11 +25,13 @@
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
-    height: $inputs-height;
+    height: $drs-height;
     padding: 0 1em 0 0.8em;
-    border: 1px dashed $inputs-border-color;
+    border: 1px dashed $drs-border-color;
+    color: $drs-color;
     transition: all 0.1s ease-in-out;
     overflow: hidden;
+    z-index: 2;
     @include icon-before;
     &::after {
       content: "";
@@ -37,8 +39,8 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, 100%) scale(0.5);
-      width: $inputs-height;
-      height: $inputs-height;
+      width: $drs-height;
+      height: $drs-height;
       opacity: 0;
       background: rgba(50, 50, 50, 0.2);
       border-radius: 50%;
@@ -64,15 +66,18 @@
     position: absolute;
 
     &:focus + label {
-      border-color: $inputs-border-active-color;
+      border-color: darken($drs-border-color, 40);
     }
-    &:active:not(:disabled) + label {
-      background: rgba(50, 50, 50, 0.2);
+    &:not(:disabled):active + label {
+      border-color: darken($drs-border-color, 40);
+      box-shadow: 0 0 40px $drs-border-color inset;
+      transition: none;
     }
     &:disabled {
       pointer-events: none;
       & + label {
-        color: #888;
+        color: lighten($drs-color, 40);
+        border-color: lighten($drs-border-color, 10);
         cursor: default;
       }
     }
@@ -80,7 +85,7 @@
 
   &.PENDING {
     label {
-      color: #555;
+      color: lighten($drs-color, 40);
       &::after {
         animation: drs-pending 2s ease-in infinite;
       }
@@ -90,10 +95,10 @@
     input,
     button {
       &:disabled + label {
-        color: #222;
-        border-color: #69b969;
+        color: $drs-color;
+        border-color: #4fb94f;
         &::after {
-          background: #69b969;
+          background: rgba(5, 180, 0, 0.3);
           animation: drs-pending 2s ease-in forwards;
         }
       }
@@ -106,7 +111,7 @@
         color: #222;
         border-color: #ff5151;
         &::after {
-          background: #ff5151;
+          background: rgba(180, 5, 0, 0.3);
           animation: drs-pending 2s ease-in-out forwards;
         }
       }
@@ -129,14 +134,75 @@
     }
   }
   &.drs-bInput--IconOnly {
-    min-width: $inputs-height;
-    width: $inputs-height;
-    height: $inputs-height;
+    min-width: $drs-height;
+    width: $drs-height;
+    height: $drs-height;
     label {
       padding: 0;
       &::before {
         transform: scale(1.2);
         margin: 0;
+      }
+    }
+  }
+
+  &.drs-darkTheme {
+    label {
+      color: $drs-dark-color;
+      border-color: $drs-dark-border-color;
+      &::after {
+        background: rgba(220, 220, 220, 0.2);
+      }
+    }
+    input,
+    button {
+      &:focus + label {
+        border-color: lighten($drs-dark-border-color, 40);
+      }
+      &:not(:disabled):active + label {
+        border-color: lighten($drs-dark-border-color, 40);
+        box-shadow: 0 0 40px $drs-dark-border-color inset;
+      }
+      &:disabled {
+        & + label {
+          color: darken($drs-dark-color, 40);
+          border-color: darken($drs-dark-border-color, 10);
+        }
+      }
+    }
+    &.PENDING {
+      label {
+        color: darken($drs-dark-color, 40);
+      }
+    }
+    &.SUCCESS {
+      input,
+      button {
+        &:disabled + label {
+          color: $drs-dark-color;
+          border-color: #4fb94f;
+          &::after {
+            background: rgba(10, 255, 0, 0.2);
+          }
+        }
+      }
+    }
+    &.FAIL {
+      input,
+      button {
+        &:disabled + label {
+          color: $drs-dark-color;
+          &::after {
+            background: rgba(255, 10, 0, 0.2);
+          }
+        }
+      }
+    }
+
+    &:hover {
+      input:not(:disabled) + label,
+      button:not(:disabled) + label {
+        background: rgba(220, 220, 220, 0.05);
       }
     }
   }

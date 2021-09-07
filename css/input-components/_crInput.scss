@@ -7,7 +7,7 @@
 .cInput,
 .rInput {
   user-select: none;
-  height: $inputs-height;
+  height: $drs-height;
   display: inline-flex;
   align-items: center;
   label {
@@ -16,6 +16,7 @@
     span.label {
       min-width: max-content;
       margin: 0 0.3em;
+      color: $drs-color;
     }
     span.cr-box {
       position: relative;
@@ -23,7 +24,7 @@
       height: 22px;
       margin: 3px;
       cursor: pointer;
-      border: 2px solid $inputs-border-color;
+      border: 2px solid $drs-border-color;
       transition: all 0.1s ease-in;
       &::after {
         content: "";
@@ -32,7 +33,7 @@
         top: -36%;
         width: 172%;
         height: 172%;
-        background: rgba(50, 50, 50, 0.05);
+        background: rgba(50, 50, 50, 0.1);
         opacity: 0;
       }
     }
@@ -42,13 +43,15 @@
     position: absolute;
     pointer-events: none;
 
-    &:checked + label span.cr-box {
-      border-color: #127900;
-    }
     &:focus + label span.cr-box {
+      border-color: darken($drs-border-color, 40);
       &::after {
         opacity: 0.8;
       }
+    }
+    &:checked + label span.cr-box,
+    &:checked:focus + label span.cr-box {
+      border-color: #127900;
     }
 
     // Disabled
@@ -73,12 +76,37 @@
       }
     }
   }
+
+  &.drs-darkTheme {
+    input {
+      &:focus + label {
+        span.cr-box {
+          border-color: lighten($drs-dark-border-color, 40);
+        }
+      }
+      &:checked:focus + label span.cr-box {
+        border-color: #127900;
+      }
+    }
+
+    label {
+      span.label {
+        color: $drs-dark-color;
+      }
+      span.cr-box {
+        border-color: $drs-dark-border-color;
+        &::after {
+          background: rgba(220, 220, 220, 0.1);
+        }
+      }
+    }
+  }
 }
 
 .cInput {
   label {
     span.cr-box {
-      border-radius: $inputs-border-radius;
+      border-radius: $drs-border-radius;
       &::after {
         border-radius: 5px;
       }

@@ -1,5 +1,17 @@
 # Inputs
 
+- It's better to **not use** the pre-defiend classes for adding the elements to instences of a class.
+
+  `.tInput` | `.cInput` | `.rInput` | `.fInput` | `.bInput`  
+  It's Ok in some cases but not recommended. because the constructor adds these classes if they are missing. And in some cases referencing elements with pre-defined classes can introduce bugs.
+
+  ```javascript
+  // Ok in some cases but not always
+  document.querySelectorAll(".cInput").forEach((cInput) => {
+    new CInput(cInput);
+  });
+  ```
+
 Check [Demo](https://drastraa.github.io/Inputs/).
 
 - `data-icon` attribute is using [Material Icons](https://fonts.google.com/icons "Material icons reference")
@@ -13,6 +25,14 @@ Check [Demo](https://drastraa.github.io/Inputs/).
      ```
 
   2. Create instences of the class for each input.
+
+## Input Class
+
+All other classes extend this class
+
+- It contains `DRS_INPUTS` property that saves all the instences of the subclasses.
+- `Input.darkThemeAll(true/false)` can be called.
+- `darkTheme(true/false)` method can be called on instences of the subclasses.
 
 ## Text Input
 
@@ -28,9 +48,7 @@ Check [Demo](https://drastraa.github.io/Inputs/).
 ```
 
 ```javascript
-document.querySelectorAll(".tInput").forEach((tInput) => {
-  new TInput(tInput);
-});
+new TInput(tInput);
 ```
 
 ## Checkbox / Radio
@@ -47,9 +65,7 @@ document.querySelectorAll(".tInput").forEach((tInput) => {
 ```
 
 ```javascript
-document.querySelectorAll(".cInput").forEach((cInput) => {
-  new CInput(cInput);
-});
+new CInput(cInput);
 ```
 
 ### Radio
@@ -62,9 +78,7 @@ document.querySelectorAll(".cInput").forEach((cInput) => {
 ```
 
 ```javascript
-document.querySelectorAll(".rInput").forEach((rInput) => {
-  new RInput(rInput);
-});
+new RInput(rInput);
 ```
 
 ## File Input
@@ -77,9 +91,7 @@ document.querySelectorAll(".rInput").forEach((rInput) => {
 ```
 
 ```javascript
-document.querySelectorAll(".fInput").forEach((fInput) => {
-  new FInput(fInput);
-});
+new FInput(fInput);
 ```
 
 ### Expanded version of File Input
@@ -93,6 +105,8 @@ document.querySelectorAll(".fInput").forEach((fInput) => {
 ```
 
 ## Button Input
+
+- Add `.rtlI` to `.tInput` when using **rtl** input
 
 ### Button Class
 
@@ -146,7 +160,7 @@ button.onClick(() => {
 
 #### BInput Usage
 
-- Add `.clickPend` class to `bInput` for activating PENDING mode on click.
+- Add `.drs-clickPend` class to `bInput` for activating PENDING mode on click.
 
 - Buttons can be assigned with **Only Icon**. (automatic)
 
@@ -171,9 +185,7 @@ button.onClick(() => {
   ```
 
 ```javascript
-document.querySelectorAll(".bInput").forEach((bInput) => {
-  new BInput(bInput);
-});
+new BInput(bInput);
 ```
 
 ## Todo

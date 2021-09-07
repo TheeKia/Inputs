@@ -1,6 +1,6 @@
 .tInput {
   position: relative;
-  height: $inputs-height;
+  height: $drs-height;
   display: inline-flex;
   width: max-content;
 
@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: 0 10px;
-    border-radius: $inputs-border-radius;
+    border-radius: $drs-border-radius;
     transition: all 0.1s ease-in-out;
     background: transparent;
   }
@@ -19,21 +19,23 @@
     position: absolute;
     top: 50%;
     left: 0;
+    font-size: 0.9em;
     transform: translateY(-50%);
     min-width: max-content;
     cursor: text;
-    color: #555;
+    color: lighten($drs-color, 20);
     @include icon-before;
   }
 
   input {
     width: 100%;
-    height: $inputs-height;
+    height: $drs-height;
     outline: none;
-    border: 1px solid $inputs-border-color;
+    border: 1px solid $drs-border-color;
+    color: $drs-color;
 
     &:focus {
-      border-color: $inputs-border-active-color;
+      border-color: darken($drs-border-color, 40);
     }
 
     &:disabled + label {
@@ -55,12 +57,14 @@
     }
 
     // CHECK
+    &:-webkit-autofill,
     &:autofill {
       animation: autofilled;
       background: transparent !important;
     }
-    &:-webkit-autofill {
-      animation: autofilled;
+    &:not(:-webkit-autofill),
+    &:not(:autofill) {
+      animation: noAutofill;
       background: transparent !important;
     }
     // CHECK
@@ -71,9 +75,9 @@
       top: -2px;
       left: 5px;
       padding: 0 5px;
-      font-size: 0.9em;
-      color: #222;
-      background: $bg-color;
+      font-size: 0.8em;
+      background: $drs-bg-color;
+      color: $drs-color;
     }
     input {
       &::placeholder {
@@ -127,6 +131,25 @@
           margin-left: -20px;
           margin-right: auto;
         }
+      }
+    }
+  }
+
+  &.drs-darkTheme {
+    input {
+      border-color: $drs-dark-border-color;
+      color: $drs-dark-color;
+      &:focus {
+        border-color: lighten($drs-dark-border-color, 40);
+      }
+    }
+    label {
+      color: darken($drs-dark-color, 20);
+    }
+    &.ACTIVE {
+      label {
+        color: $drs-dark-color;
+        background: $drs-dark-bg-color;
       }
     }
   }

@@ -1,18 +1,62 @@
-class TInput {
-  constructor(tInput) {
-    this.tInput = tInput;
-    this.input = tInput.querySelector("input");
-    this.label = tInput.querySelector("label");
+class Input {
+  static DRS_INPUTS = [];
 
-    if (!this.tInput.classList.contains("tInput")) {
-      this.tInput.classList.add("tInput");
+  constructor(parent) {
+    try {
+      this.parent = parent;
+      this.input = parent.querySelector("input")
+        ? parent.querySelector("input")
+        : parent.querySelector("button");
+      this.label = parent.querySelector("label");
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+    Input.DRS_INPUTS.push(this);
+  }
+
+  static darkThemeAll(TF = true) {
+    if (TF) {
+      Input.DRS_INPUTS.forEach((input) => {
+        if (!input.parent.classList.contains("drs-darkTheme")) {
+          input.parent.classList.add("drs-darkTheme");
+        }
+      });
+    } else {
+      Input.DRS_INPUTS.forEach((input) => {
+        if (input.parent.classList.contains("drs-darkTheme")) {
+          input.parent.classList.remove("drs-darkTheme");
+        }
+      });
+    }
+  }
+
+  darkTheme(TF = true) {
+    if (TF) {
+      if (!this.parent.classList.contains("drs-darkTheme")) {
+        this.parent.classList.add("drs-darkTheme");
+      }
+    } else {
+      if (this.parent.classList.contains("drs-darkTheme")) {
+        this.parent.classList.remove("drs-darkTheme");
+      }
+    }
+  }
+}
+
+class TInput extends Input {
+  constructor(parent) {
+    super(parent);
+
+    if (!this.parent.classList.contains("tInput")) {
+      this.parent.classList.add("tInput");
     }
 
     if (!this.input) {
-      console.warn("Something went wrong in Input Class", tInput);
+      console.warn("Something went wrong in Input Class", this.parent);
       return;
     } else if (!this.label) {
-      this.tInput.classList.add("NOLABEL");
+      this.parent.classList.add("NOLABEL");
     }
 
     if (this.input.value.length > 0) {
@@ -26,51 +70,55 @@ class TInput {
     });
 
     // Detecting if Autofilled
-
-    tInput.addEventListener("animationstart", (e) => {
-      if (e.animationName === "startActivation") {
+    this.input.addEventListener("animationstart", (e) => {
+      if (e.animationName === "autofilled") {
         this.autofill();
       }
     });
-    this.input.addEventListener("change", () => {
-      this.removeAutofill();
+    this.input.addEventListener("animationstart", (e) => {
+      if (e.animationName === "noAutofill") {
+        this.removeAutofill();
+      }
+    });
+    this.input.addEventListener("input", () => {
+      if (this.input.value.length > 0) {
+        this.active();
+      }
     });
   }
 
   active() {
-    if (!this.tInput.classList.contains("ACTIVE")) {
-      this.tInput.classList.add("ACTIVE");
+    if (!this.parent.classList.contains("ACTIVE")) {
+      this.parent.classList.add("ACTIVE");
     }
   }
   deactive() {
     if (this.input.value.length === 0) {
-      this.tInput.classList.remove("ACTIVE", "AUTOFILL");
+      this.parent.classList.remove("ACTIVE", "AUTOFILL");
     }
   }
   autofill(value = null) {
     this.active();
-    if (!this.tInput.classList.contains("AUTOFILL")) {
-      this.tInput.classList.add("AUTOFILL");
+    if (!this.parent.classList.contains("AUTOFILL")) {
+      this.parent.classList.add("AUTOFILL");
     }
     if (value) {
       this.input.value = value;
     }
   }
   removeAutofill() {
-    if (this.tInput.classList.contains("AUTOFILL")) {
-      this.tInput.classList.remove("AUTOFILL");
+    if (this.parent.classList.contains("AUTOFILL")) {
+      this.parent.classList.remove("AUTOFILL");
     }
   }
 }
 
-class CInput {
-  constructor(cInput) {
-    this.cInput = cInput;
-    this.input = cInput.querySelector("input");
-    this.label = cInput.querySelector("label");
+class CInput extends Input {
+  constructor(parent) {
+    super(parent);
 
-    if (!this.cInput.classList.contains("cInput")) {
-      this.cInput.classList.add("cInput");
+    if (!this.parent.classList.contains("cInput")) {
+      this.parent.classList.add("cInput");
     }
 
     this.createLabelBox();
@@ -83,14 +131,12 @@ class CInput {
     this.label.prepend(span);
   }
 }
-class RInput {
-  constructor(rInput) {
-    this.rInput = rInput;
-    this.input = rInput.querySelector("input");
-    this.label = rInput.querySelector("label");
+class RInput extends Input {
+  constructor(parent) {
+    super(parent);
 
-    if (!this.rInput.classList.contains("rInput")) {
-      this.rInput.classList.add("rInput");
+    if (!this.parent.classList.contains("rInput")) {
+      this.parent.classList.add("rInput");
     }
 
     this.createLabelBox();
@@ -103,25 +149,32 @@ class RInput {
   }
 }
 
-class FInput {
-  constructor(fInput) {
-    this.fInput = fInput;
-    this.input = fInput.querySelector("input");
-    this.label = fInput.querySelector("label");
+class FInput extends Input {
+  constructor(parent) {
+    super(parent);
 
-    if (!this.fInput.classList.contains("fInput")) {
-      this.fInput.classList.add("fInput");
+    if (!this.parent.classList.contains("fInput")) {
+      this.parent.classList.add("fInput");
     }
 
     this.defaultLabel = this.label.innerHTML;
+
     this.initiate();
 
-    if (this.fInput.dataset.expand) {
+    if (
+      this.parent.dataset.expand &&
+      document.getElementById(this.parent.dataset.expand)
+    ) {
       this.expand = true;
-      this.expandElement = document.getElementById(this.fInput.dataset.expand);
+      this.expandElement = document.getElementById(this.parent.dataset.expand);
       this.expandElement.classList.add("fI-expand");
       this.expandElement.innerHTML = "";
     } else {
+      if (this.parent.dataset.expand) {
+        console.warn(
+          `The expand element of File Input not exists. No element by ID: ${this.parent.dataset.expand}`
+        );
+      }
       this.expand = false;
       this.expandElement = null;
     }
@@ -197,13 +250,13 @@ class FInput {
   }
 
   activate() {
-    if (!this.fInput.classList.contains("active")) {
-      this.fInput.classList.add("active");
+    if (!this.parent.classList.contains("active")) {
+      this.parent.classList.add("active");
     }
   }
   deactivate() {
-    if (this.fInput.classList.contains("active")) {
-      this.fInput.classList.remove("active");
+    if (this.parent.classList.contains("active")) {
+      this.parent.classList.remove("active");
     }
   }
 
@@ -219,32 +272,27 @@ class FInput {
   }
 }
 
-class BInput {
-  constructor(bInput) {
-    this.bInput = bInput;
-    if (bInput.querySelector("input")) {
-      this.type = "input";
-      this.input = bInput.querySelector("input");
-    } else {
-      this.type = "button";
-      this.input = bInput.querySelector("button");
+class BInput extends Input {
+  constructor(parent) {
+    super(parent);
+
+    if (!this.parent.classList.contains("bInput")) {
+      this.parent.classList.add("bInput");
     }
-    this.label = bInput.querySelector("label");
 
     this.isProgressSet = false;
 
-    if (!this.bInput.classList.contains("bInput")) {
-      this.bInput.classList.add("bInput");
-    }
+    // Icon Only
     if (
       this.label.innerHTML === "" &&
       this.label.dataset.icon.length > 0 &&
-      !this.bInput.classList.contains("drs-bInput--IconOnly")
+      !this.parent.classList.contains("drs-bInput--IconOnly")
     ) {
-      this.bInput.classList.add("drs-bInput--IconOnly");
+      this.parent.classList.add("drs-bInput--IconOnly");
     }
 
-    if (this.bInput.classList.contains("clickPend")) {
+    // Click Pend
+    if (this.parent.classList.contains("drs-clickPend")) {
       this.input.addEventListener("click", () => {
         this.pend();
       });
@@ -252,12 +300,12 @@ class BInput {
   }
 
   pend() {
-    this.bInput.classList.add("PENDING");
+    this.parent.classList.add("PENDING");
     this.input.disabled = true;
     return this;
   }
   unpend() {
-    this.bInput.classList.remove("PENDING");
+    this.parent.classList.remove("PENDING");
     this.input.disabled = false;
     return this;
   }
@@ -286,10 +334,10 @@ class BInput {
       return;
     }
     status = status.toUpperCase();
-    this.bInput.classList.remove("PENDING");
-    this.bInput.classList.add(status);
+    this.parent.classList.remove("PENDING");
+    this.parent.classList.add(status);
     setTimeout(() => {
-      this.bInput.classList.remove(status);
+      this.parent.classList.remove(status);
       this.input.disabled = false;
     }, 1000);
     return this;
@@ -302,6 +350,7 @@ class BInput {
     });
     return this;
   }
+
   async fetch(
     url,
     method = "GET",

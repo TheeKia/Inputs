@@ -3,11 +3,17 @@ UPPERCASE classes are handled by JavaScript
 - .rtl can be added to body element
 */
 
-$bg-color: #ecf0f3;
-$inputs-border-color: #ccc;
-$inputs-border-active-color: #777;
-$inputs-border-radius: 2px;
-$inputs-height: 36px;
+/*--------------- Light Theme ---------------*/
+$drs-bg-color: #ecf0f3;
+$drs-color: #222;
+$drs-border-color: #aaa;
+/*--------------- Dark Theme  ---------------*/
+$drs-dark-bg-color: #181818;
+$drs-dark-color: #bbb;
+$drs-dark-border-color: #5f5f5f;
+/*--------------- General     ---------------*/
+$drs-border-radius: 2px;
+$drs-height: 36px;
 
 * {
   box-sizing: border-box;
@@ -16,7 +22,7 @@ $inputs-height: 36px;
 // For triggering when autofilled
 @keyframes autofilled {
 }
-@keyframes stopActivation {
+@keyframes noAutofill {
 }
 
 // Animations

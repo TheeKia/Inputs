@@ -2,6 +2,9 @@
 UPPERCASE classes are handled by JavaScript
 - .rtl can be added to body element
 */
+/*--------------- Light Theme ---------------*/
+/*--------------- Dark Theme  ---------------*/
+/*--------------- General     ---------------*/
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -9,7 +12,7 @@ UPPERCASE classes are handled by JavaScript
 
 @-webkit-keyframes autofilled {}
 
-@keyframes autofilled {}@-webkit-keyframes stopActivation {}@keyframes stopActivation {}@-webkit-keyframes rotate {
+@keyframes autofilled {}@-webkit-keyframes noAutofill {}@keyframes noAutofill {}@-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0);
             transform: rotate(0);
@@ -62,13 +65,14 @@ UPPERCASE classes are handled by JavaScript
   position: absolute;
   top: 50%;
   left: 0;
+  font-size: 0.9em;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
   cursor: text;
-  color: #555;
+  color: #555555;
 }
 
 .tInput label::before {
@@ -82,11 +86,12 @@ UPPERCASE classes are handled by JavaScript
   width: 100%;
   height: 36px;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
+  color: #222;
 }
 
 .tInput input:focus {
-  border-color: #777;
+  border-color: #444444;
 }
 
 .tInput input:disabled + label {
@@ -123,15 +128,15 @@ UPPERCASE classes are handled by JavaScript
   text-align: left;
 }
 
-.tInput input:autofill {
+.tInput input:-webkit-autofill, .tInput input:autofill {
   -webkit-animation: autofilled;
           animation: autofilled;
   background: transparent !important;
 }
 
-.tInput input:-webkit-autofill {
-  -webkit-animation: autofilled;
-          animation: autofilled;
+.tInput input:not(:-webkit-autofill), .tInput input:not(:autofill) {
+  -webkit-animation: noAutofill;
+          animation: noAutofill;
   background: transparent !important;
 }
 
@@ -139,9 +144,9 @@ UPPERCASE classes are handled by JavaScript
   top: -2px;
   left: 5px;
   padding: 0 5px;
-  font-size: 0.9em;
-  color: #222;
+  font-size: 0.8em;
   background: #ecf0f3;
+  color: #222;
 }
 
 .tInput.ACTIVE input::-webkit-input-placeholder {
@@ -212,6 +217,24 @@ UPPERCASE classes are handled by JavaScript
   margin-right: auto;
 }
 
+.tInput.drs-darkTheme input {
+  border-color: #5f5f5f;
+  color: #bbb;
+}
+
+.tInput.drs-darkTheme input:focus {
+  border-color: #c5c5c5;
+}
+
+.tInput.drs-darkTheme label {
+  color: #888888;
+}
+
+.tInput.drs-darkTheme.ACTIVE label {
+  color: #bbb;
+  background: #181818;
+}
+
 @-webkit-keyframes check {
   to {
     stroke-dashoffset: 0;
@@ -255,6 +278,7 @@ UPPERCASE classes are handled by JavaScript
   min-width: -moz-max-content;
   min-width: max-content;
   margin: 0 0.3em;
+  color: #222;
 }
 
 .cInput label span.cr-box,
@@ -264,7 +288,7 @@ UPPERCASE classes are handled by JavaScript
   height: 22px;
   margin: 3px;
   cursor: pointer;
-  border: 2px solid #ccc;
+  border: 2px solid #aaa;
   -webkit-transition: all 0.1s ease-in;
   transition: all 0.1s ease-in;
 }
@@ -277,7 +301,7 @@ UPPERCASE classes are handled by JavaScript
   top: -36%;
   width: 172%;
   height: 172%;
-  background: rgba(50, 50, 50, 0.05);
+  background: rgba(50, 50, 50, 0.1);
   opacity: 0;
 }
 
@@ -288,14 +312,21 @@ UPPERCASE classes are handled by JavaScript
   pointer-events: none;
 }
 
-.cInput input:checked + label span.cr-box,
-.rInput input:checked + label span.cr-box {
-  border-color: #127900;
+.cInput input:focus + label span.cr-box,
+.rInput input:focus + label span.cr-box {
+  border-color: #444444;
 }
 
 .cInput input:focus + label span.cr-box::after,
 .rInput input:focus + label span.cr-box::after {
   opacity: 0.8;
+}
+
+.cInput input:checked + label span.cr-box,
+.cInput input:checked:focus + label span.cr-box,
+.rInput input:checked + label span.cr-box,
+.rInput input:checked:focus + label span.cr-box {
+  border-color: #127900;
 }
 
 .cInput input:disabled + label span.cr-box,
@@ -317,6 +348,31 @@ UPPERCASE classes are handled by JavaScript
 .cInput:hover label span.cr-box::after,
 .rInput:hover label span.cr-box::after {
   opacity: 1;
+}
+
+.cInput.drs-darkTheme input:focus + label span.cr-box,
+.rInput.drs-darkTheme input:focus + label span.cr-box {
+  border-color: #c5c5c5;
+}
+
+.cInput.drs-darkTheme input:checked:focus + label span.cr-box,
+.rInput.drs-darkTheme input:checked:focus + label span.cr-box {
+  border-color: #127900;
+}
+
+.cInput.drs-darkTheme label span.label,
+.rInput.drs-darkTheme label span.label {
+  color: #bbb;
+}
+
+.cInput.drs-darkTheme label span.cr-box,
+.rInput.drs-darkTheme label span.cr-box {
+  border-color: #5f5f5f;
+}
+
+.cInput.drs-darkTheme label span.cr-box::after,
+.rInput.drs-darkTheme label span.cr-box::after {
+  background: rgba(220, 220, 220, 0.1);
 }
 
 .cInput label span.cr-box {
@@ -394,7 +450,8 @@ UPPERCASE classes are handled by JavaScript
   line-height: 36px;
   padding: 0 10px;
   border-radius: 2px;
-  border: 1px dashed #ccc;
+  border: 1px dashed #aaa;
+  color: #222;
   font-size: 0.92em;
   overflow: hidden;
   font-family: monospace;
@@ -417,8 +474,8 @@ UPPERCASE classes are handled by JavaScript
           transform: translateY(-50%);
   line-height: normal;
   border-radius: 2px;
-  border: 1px solid rgba(50, 50, 50, 0.3);
-  color: #555;
+  border: 1px solid #c4c4c4;
+  color: #555555;
 }
 
 .fInput input {
@@ -428,15 +485,40 @@ UPPERCASE classes are handled by JavaScript
 }
 
 .fInput input:focus + label {
-  border-color: #777;
+  border-color: #444444;
+  color: black;
 }
 
 .fInput.active label {
+  color: black;
   border-style: solid;
 }
 
 .fInput:hover label {
   background: rgba(50, 50, 50, 0.05);
+}
+
+.fInput.drs-darkTheme label {
+  color: #bbb;
+  border-color: #5f5f5f;
+}
+
+.fInput.drs-darkTheme label .fI-detail {
+  border-color: #464646;
+  color: #a2a2a2;
+}
+
+.fInput.drs-darkTheme input:focus + label {
+  border-color: #c5c5c5;
+  color: white;
+}
+
+.fInput.drs-darkTheme.active label {
+  color: white;
+}
+
+.fInput.drs-darkTheme:hover label {
+  background: rgba(220, 220, 220, 0.05);
 }
 
 .fI-expand {
@@ -471,11 +553,15 @@ UPPERCASE classes are handled by JavaScript
   line-height: normal;
   border-radius: 2px;
   border: 1px solid rgba(50, 50, 50, 0.3);
-  color: #555;
+  color: #555555;
 }
 
 .fI-expand > p:nth-child(even) {
   background: rgba(50, 50, 50, 0.1);
+}
+
+.fI-expand:empty {
+  display: none;
 }
 
 @-webkit-keyframes drs-pending {
@@ -544,10 +630,12 @@ UPPERCASE classes are handled by JavaScript
   cursor: pointer;
   height: 36px;
   padding: 0 1em 0 0.8em;
-  border: 1px dashed #ccc;
+  border: 1px dashed #aaa;
+  color: #222;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
   overflow: hidden;
+  z-index: 2;
 }
 
 .bInput label::before {
@@ -601,12 +689,16 @@ UPPERCASE classes are handled by JavaScript
 
 .bInput input:focus + label,
 .bInput button:focus + label {
-  border-color: #777;
+  border-color: #444444;
 }
 
-.bInput input:active:not(:disabled) + label,
-.bInput button:active:not(:disabled) + label {
-  background: rgba(50, 50, 50, 0.2);
+.bInput input:not(:disabled):active + label,
+.bInput button:not(:disabled):active + label {
+  border-color: #444444;
+  -webkit-box-shadow: 0 0 40px #aaa inset;
+          box-shadow: 0 0 40px #aaa inset;
+  -webkit-transition: none;
+  transition: none;
 }
 
 .bInput input:disabled,
@@ -616,12 +708,13 @@ UPPERCASE classes are handled by JavaScript
 
 .bInput input:disabled + label,
 .bInput button:disabled + label {
-  color: #888;
+  color: #888888;
+  border-color: #c4c4c4;
   cursor: default;
 }
 
 .bInput.PENDING label {
-  color: #555;
+  color: #888888;
 }
 
 .bInput.PENDING label::after {
@@ -632,12 +725,12 @@ UPPERCASE classes are handled by JavaScript
 .bInput.SUCCESS input:disabled + label,
 .bInput.SUCCESS button:disabled + label {
   color: #222;
-  border-color: #69b969;
+  border-color: #4fb94f;
 }
 
 .bInput.SUCCESS input:disabled + label::after,
 .bInput.SUCCESS button:disabled + label::after {
-  background: #69b969;
+  background: rgba(5, 180, 0, 0.3);
   -webkit-animation: drs-pending 2s ease-in forwards;
           animation: drs-pending 2s ease-in forwards;
 }
@@ -650,7 +743,7 @@ UPPERCASE classes are handled by JavaScript
 
 .bInput.FAIL input:disabled + label::after,
 .bInput.FAIL button:disabled + label::after {
-  background: #ff5151;
+  background: rgba(180, 5, 0, 0.3);
   -webkit-animation: drs-pending 2s ease-in-out forwards;
           animation: drs-pending 2s ease-in-out forwards;
 }
@@ -685,6 +778,63 @@ UPPERCASE classes are handled by JavaScript
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
   margin: 0;
+}
+
+.bInput.drs-darkTheme label {
+  color: #bbb;
+  border-color: #5f5f5f;
+}
+
+.bInput.drs-darkTheme label::after {
+  background: rgba(220, 220, 220, 0.2);
+}
+
+.bInput.drs-darkTheme input:focus + label,
+.bInput.drs-darkTheme button:focus + label {
+  border-color: #c5c5c5;
+}
+
+.bInput.drs-darkTheme input:not(:disabled):active + label,
+.bInput.drs-darkTheme button:not(:disabled):active + label {
+  border-color: #c5c5c5;
+  -webkit-box-shadow: 0 0 40px #5f5f5f inset;
+          box-shadow: 0 0 40px #5f5f5f inset;
+}
+
+.bInput.drs-darkTheme input:disabled + label,
+.bInput.drs-darkTheme button:disabled + label {
+  color: #555555;
+  border-color: #464646;
+}
+
+.bInput.drs-darkTheme.PENDING label {
+  color: #555555;
+}
+
+.bInput.drs-darkTheme.SUCCESS input:disabled + label,
+.bInput.drs-darkTheme.SUCCESS button:disabled + label {
+  color: #bbb;
+  border-color: #4fb94f;
+}
+
+.bInput.drs-darkTheme.SUCCESS input:disabled + label::after,
+.bInput.drs-darkTheme.SUCCESS button:disabled + label::after {
+  background: rgba(10, 255, 0, 0.2);
+}
+
+.bInput.drs-darkTheme.FAIL input:disabled + label,
+.bInput.drs-darkTheme.FAIL button:disabled + label {
+  color: #bbb;
+}
+
+.bInput.drs-darkTheme.FAIL input:disabled + label::after,
+.bInput.drs-darkTheme.FAIL button:disabled + label::after {
+  background: rgba(255, 10, 0, 0.2);
+}
+
+.bInput.drs-darkTheme:hover input:not(:disabled) + label,
+.bInput.drs-darkTheme:hover button:not(:disabled) + label {
+  background: rgba(220, 220, 220, 0.05);
 }
 
 .flat-left,
