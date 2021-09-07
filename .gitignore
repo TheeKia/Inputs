@@ -1,3 +1,5 @@
 .gitignore
 demo.html
+style.scss
+style.css
 Release/
