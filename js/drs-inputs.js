@@ -1,13 +1,13 @@
 class Input {
   static DRS_INPUTS = [];
 
-  constructor(parent) {
+  constructor(parent, isInput = false) {
     try {
-      this.parent = parent;
-      this.input = parent.querySelector("input")
-        ? parent.querySelector("input")
-        : parent.querySelector("button");
-      this.label = parent.querySelector("label");
+      this.parent = isInput ? parent.parentElement : parent;
+      this.input = this.parent.querySelector("input")
+        ? this.parent.querySelector("input")
+        : this.parent.querySelector("button");
+      this.label = this.parent.querySelector("label");
     } catch (err) {
       console.log(err);
       return;
@@ -39,8 +39,8 @@ class Input {
 }
 
 class TInput extends Input {
-  constructor(parent) {
-    super(parent);
+  constructor(parent, isInput = false) {
+    super(parent, isInput);
 
     this.parent.classList.add("tInput");
 
@@ -104,8 +104,8 @@ class TInput extends Input {
 }
 
 class CInput extends Input {
-  constructor(parent) {
-    super(parent);
+  constructor(parent, isInput = false) {
+    super(parent, isInput);
 
     this.parent.classList.add("cInput");
 
@@ -117,8 +117,8 @@ class CInput extends Input {
   }
 }
 class RInput extends Input {
-  constructor(parent) {
-    super(parent);
+  constructor(parent, isInput = false) {
+    super(parent, isInput);
 
     this.parent.classList.add("rInput");
 
@@ -129,8 +129,8 @@ class RInput extends Input {
 }
 
 class FInput extends Input {
-  constructor(parent) {
-    super(parent);
+  constructor(parent, isInput = false) {
+    super(parent, isInput);
 
     this.parent.classList.add("fInput");
 
@@ -234,8 +234,8 @@ class FInput extends Input {
 }
 
 class BInput extends Input {
-  constructor(parent) {
-    super(parent);
+  constructor(parent, isInput = false) {
+    super(parent, isInput);
 
     this.parent.classList.add("bInput");
 
