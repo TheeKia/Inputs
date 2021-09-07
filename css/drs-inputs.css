@@ -611,7 +611,6 @@ UPPERCASE classes are handled by JavaScript
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  border-radius: 2px;
 }
 
 .bInput label {
@@ -630,6 +629,7 @@ UPPERCASE classes are handled by JavaScript
   height: 36px;
   padding: 0 1em 0 0.8em;
   border: 1px dashed #aaa;
+  border-radius: 2px;
   color: #222;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;

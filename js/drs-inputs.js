@@ -31,6 +31,17 @@ class Input {
     }
   }
 
+  static formatSize(size) {
+    const unit = ["B", "KB", "MB", "GB", "TB"];
+    let unitIndex = 0;
+    while (size >= 1000) {
+      size /= 1000;
+      unitIndex++;
+    }
+    size = size.toString().slice(0, 3);
+    return size + unit[unitIndex];
+  }
+
   darkTheme(TF = true) {
     if (TF) {
       if (!this.parent.classList.contains("drs-darkTheme")) {
@@ -41,6 +52,7 @@ class Input {
         this.parent.classList.remove("drs-darkTheme");
       }
     }
+    return this;
   }
 }
 
@@ -91,11 +103,13 @@ class TInput extends Input {
     if (!this.parent.classList.contains("ACTIVE")) {
       this.parent.classList.add("ACTIVE");
     }
+    return this;
   }
   deactive() {
     if (this.input.value.length === 0) {
       this.parent.classList.remove("ACTIVE", "AUTOFILL");
     }
+    return this;
   }
   autofill(value = null) {
     this.active();
@@ -105,11 +119,13 @@ class TInput extends Input {
     if (value) {
       this.input.value = value;
     }
+    return this;
   }
   removeAutofill() {
     if (this.parent.classList.contains("AUTOFILL")) {
       this.parent.classList.remove("AUTOFILL");
     }
+    return this;
   }
 }
 
@@ -121,9 +137,6 @@ class CInput extends Input {
       this.parent.classList.add("cInput");
     }
 
-    this.createLabelBox();
-  }
-  createLabelBox() {
     let span = document.createElement("span");
     span.setAttribute("class", "cr-box");
     span.innerHTML =
@@ -139,10 +152,6 @@ class RInput extends Input {
       this.parent.classList.add("rInput");
     }
 
-    this.createLabelBox();
-  }
-
-  createLabelBox() {
     let span = document.createElement("span");
     span.setAttribute("class", "cr-box");
     this.label.prepend(span);
@@ -159,28 +168,7 @@ class FInput extends Input {
 
     this.defaultLabel = this.label.innerHTML;
 
-    this.initiate();
-
-    if (
-      this.parent.dataset.expand &&
-      document.getElementById(this.parent.dataset.expand)
-    ) {
-      this.expand = true;
-      this.expandElement = document.getElementById(this.parent.dataset.expand);
-      this.expandElement.classList.add("fI-expand");
-      this.expandElement.innerHTML = "";
-    } else {
-      if (this.parent.dataset.expand) {
-        console.warn(
-          `The expand element of File Input not exists. No element by ID: ${this.parent.dataset.expand}`
-        );
-      }
-      this.expand = false;
-      this.expandElement = null;
-    }
-  }
-
-  initiate() {
+    // Initiation
     this.input.addEventListener("input", () => {
       let files = this.input.files;
 
@@ -196,14 +184,14 @@ class FInput extends Input {
         for (let file of files) {
           totalSize += file.size;
         }
-        totalSize = this.formatSize(totalSize);
+        totalSize = Input.formatSize(totalSize);
 
         this.label.innerHTML = `${files.length} files <span class='fI-detail'>${totalSize}</span>`;
 
         if (this.expand) {
           for (let file of files) {
             let p = document.createElement("p");
-            let size = this.formatSize(file.size);
+            let size = Input.formatSize(file.size);
             p.innerHTML = `${file.name} <span class='fI-detail'>${size}</span>`;
             this.expandElement.appendChild(p);
           }
@@ -214,7 +202,7 @@ class FInput extends Input {
 
         let originalName = files[0].name;
         // Size handling
-        let size = this.formatSize(files[0].size);
+        let size = Input.formatSize(files[0].size);
 
         if (this.expand) {
           let p = document.createElement("p");
@@ -247,28 +235,37 @@ class FInput extends Input {
         }
       }
     });
+
+    if (
+      this.parent.dataset.expand &&
+      document.getElementById(this.parent.dataset.expand)
+    ) {
+      this.expand = true;
+      this.expandElement = document.getElementById(this.parent.dataset.expand);
+      this.expandElement.classList.add("fI-expand");
+      this.expandElement.innerHTML = "";
+    } else {
+      if (this.parent.dataset.expand) {
+        console.warn(
+          `The expand element of File Input not exists. No element by ID: ${this.parent.dataset.expand}`
+        );
+      }
+      this.expand = false;
+      this.expandElement = null;
+    }
   }
 
   activate() {
     if (!this.parent.classList.contains("active")) {
       this.parent.classList.add("active");
     }
+    return this;
   }
   deactivate() {
     if (this.parent.classList.contains("active")) {
       this.parent.classList.remove("active");
     }
-  }
-
-  formatSize(size) {
-    const unit = ["B", "KB", "MB", "GB", "TB"];
-    let unitIndex = 0;
-    while (size >= 1000) {
-      size /= 1000;
-      unitIndex++;
-    }
-    size = size.toString().slice(0, 3);
-    return size + unit[unitIndex];
+    return this;
   }
 }
 

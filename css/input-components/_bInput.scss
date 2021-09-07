@@ -16,7 +16,6 @@
   display: inline-flex;
   min-width: max-content;
   user-select: none;
-  border-radius: $drs-border-radius;
   // overflow: hidden;
   label {
     width: 100%;
@@ -28,6 +27,7 @@
     height: $drs-height;
     padding: 0 1em 0 0.8em;
     border: 1px dashed $drs-border-color;
+    border-radius: $drs-border-radius;
     color: $drs-color;
     transition: all 0.1s ease-in-out;
     overflow: hidden;
