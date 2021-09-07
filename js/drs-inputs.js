@@ -16,19 +16,9 @@ class Input {
   }
 
   static darkThemeAll(TF = true) {
-    if (TF) {
-      Input.DRS_INPUTS.forEach((input) => {
-        if (!input.parent.classList.contains("drs-darkTheme")) {
-          input.parent.classList.add("drs-darkTheme");
-        }
-      });
-    } else {
-      Input.DRS_INPUTS.forEach((input) => {
-        if (input.parent.classList.contains("drs-darkTheme")) {
-          input.parent.classList.remove("drs-darkTheme");
-        }
-      });
-    }
+    Input.DRS_INPUTS.forEach((input) => {
+      input.parent.classList.toggle("drs-darkTheme", TF);
+    });
   }
 
   static formatSize(size) {
@@ -43,15 +33,7 @@ class Input {
   }
 
   darkTheme(TF = true) {
-    if (TF) {
-      if (!this.parent.classList.contains("drs-darkTheme")) {
-        this.parent.classList.add("drs-darkTheme");
-      }
-    } else {
-      if (this.parent.classList.contains("drs-darkTheme")) {
-        this.parent.classList.remove("drs-darkTheme");
-      }
-    }
+    this.parent.classList.toggle("drs-darkTheme", TF);
     return this;
   }
 }
@@ -60,9 +42,7 @@ class TInput extends Input {
   constructor(parent) {
     super(parent);
 
-    if (!this.parent.classList.contains("tInput")) {
-      this.parent.classList.add("tInput");
-    }
+    this.parent.classList.add("tInput");
 
     if (!this.input) {
       console.warn("Something went wrong in Input Class", this.parent);
@@ -100,9 +80,7 @@ class TInput extends Input {
   }
 
   active() {
-    if (!this.parent.classList.contains("ACTIVE")) {
-      this.parent.classList.add("ACTIVE");
-    }
+    this.parent.classList.add("ACTIVE");
     return this;
   }
   deactive() {
@@ -113,18 +91,14 @@ class TInput extends Input {
   }
   autofill(value = null) {
     this.active();
-    if (!this.parent.classList.contains("AUTOFILL")) {
-      this.parent.classList.add("AUTOFILL");
-    }
+    this.parent.classList.add("AUTOFILL");
     if (value) {
       this.input.value = value;
     }
     return this;
   }
   removeAutofill() {
-    if (this.parent.classList.contains("AUTOFILL")) {
-      this.parent.classList.remove("AUTOFILL");
-    }
+    this.parent.classList.remove("AUTOFILL");
     return this;
   }
 }
@@ -133,9 +107,7 @@ class CInput extends Input {
   constructor(parent) {
     super(parent);
 
-    if (!this.parent.classList.contains("cInput")) {
-      this.parent.classList.add("cInput");
-    }
+    this.parent.classList.add("cInput");
 
     let span = document.createElement("span");
     span.setAttribute("class", "cr-box");
@@ -148,9 +120,7 @@ class RInput extends Input {
   constructor(parent) {
     super(parent);
 
-    if (!this.parent.classList.contains("rInput")) {
-      this.parent.classList.add("rInput");
-    }
+    this.parent.classList.add("rInput");
 
     let span = document.createElement("span");
     span.setAttribute("class", "cr-box");
@@ -162,9 +132,7 @@ class FInput extends Input {
   constructor(parent) {
     super(parent);
 
-    if (!this.parent.classList.contains("fInput")) {
-      this.parent.classList.add("fInput");
-    }
+    this.parent.classList.add("fInput");
 
     this.defaultLabel = this.label.innerHTML;
 
@@ -256,15 +224,11 @@ class FInput extends Input {
   }
 
   activate() {
-    if (!this.parent.classList.contains("active")) {
-      this.parent.classList.add("active");
-    }
+    this.parent.classList.add("active");
     return this;
   }
   deactivate() {
-    if (this.parent.classList.contains("active")) {
-      this.parent.classList.remove("active");
-    }
+    this.parent.classList.remove("active");
     return this;
   }
 }
@@ -273,18 +237,12 @@ class BInput extends Input {
   constructor(parent) {
     super(parent);
 
-    if (!this.parent.classList.contains("bInput")) {
-      this.parent.classList.add("bInput");
-    }
+    this.parent.classList.add("bInput");
 
     this.isProgressSet = false;
 
     // Icon Only
-    if (
-      this.label.innerHTML === "" &&
-      this.label.dataset.icon.length > 0 &&
-      !this.parent.classList.contains("drs-bInput--IconOnly")
-    ) {
+    if (this.label.innerHTML === "" && this.label.dataset.icon.length > 0) {
       this.parent.classList.add("drs-bInput--IconOnly");
     }
 

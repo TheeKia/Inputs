@@ -1,5 +1,7 @@
 # Inputs
 
+- To _disable_ any of the inputs, normally add `disabled` to the `<input>` or `<button>`.
+- To switch to dark mode, add class `.drs-darkTheme` to element.
 - It's better to **not use** the pre-defiend classes for adding the elements to instences of a class.
 
   `.tInput` | `.cInput` | `.rInput` | `.fInput` | `.bInput`  
@@ -36,9 +38,24 @@ All other classes extend this class
 
 ## Text Input
 
-- To disable input, simply add `disabled` to `<input>`
 - `<label>` is optional
-- Add `.rtlI` to `.tInput` when using **rtl** input
+
+### Text Input Classes
+
+```css
+tInput.rtlI /* when using rtl language */
+```
+
+### Text Input Methods
+
+```javascript
+this.active();
+this.deactive();
+this.autofill();
+this.removeAutofill();
+```
+
+### Text Input Implementation
 
 ```html
 <p class="tInput">
@@ -53,9 +70,7 @@ new TInput(tInput);
 
 ## Checkbox / Radio
 
-- To disable input, simply add `disabled` to `<input>`
-
-### Checkbox
+### Checkbox Implementation
 
 ```html
 <div class="cInput">
@@ -68,7 +83,7 @@ new TInput(tInput);
 new CInput(cInput);
 ```
 
-### Radio
+### Radio Implementation
 
 ```html
 <div class="rInput">
@@ -83,6 +98,26 @@ new RInput(rInput);
 
 ## File Input
 
+### File Input Futures
+
+#### Expanded version of File Input
+
+1. In **multiple** file select mode, `data-expand="ELEMENT-ID"` attribute can be added to `.fInput` for showing selected files in detail. _(optional)_
+
+2. Then create the target element
+
+   ```html
+   <p id="ELEMENT-ID"></p>
+   ```
+
+Each item will be added to `p#ELEMENT-ID` with the following format:
+
+```html
+<p>FILE_NAME <span class="fI-detail">FILE_SIZE</span></p>
+```
+
+### File Input Implementation
+
 ```html
 <p class="fInput">
   <input id="ID" type="file" name="" multiple />
@@ -92,16 +127,6 @@ new RInput(rInput);
 
 ```javascript
 new FInput(fInput);
-```
-
-### Expanded version of File Input
-
-1. In **multiple** file select mode, `data-expand="ELEMENT-ID"` attribute can be added to `.fInput` for showing selected files in detail. _(optional)_
-
-2. Then create the target element
-
-```html
-<p id="ELEMENT-ID"></p>
 ```
 
 ## Button Input
