@@ -612,7 +612,6 @@ UPPERCASE classes are handled by JavaScript
       -ms-user-select: none;
           user-select: none;
   border-radius: 2px;
-  overflow: hidden;
 }
 
 .bInput label {
@@ -825,6 +824,7 @@ UPPERCASE classes are handled by JavaScript
 .bInput.drs-darkTheme.FAIL input:disabled + label,
 .bInput.drs-darkTheme.FAIL button:disabled + label {
   color: #bbb;
+  border-color: #ff5151;
 }
 
 .bInput.drs-darkTheme.FAIL input:disabled + label::after,

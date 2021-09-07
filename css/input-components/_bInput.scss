@@ -17,7 +17,7 @@
   min-width: max-content;
   user-select: none;
   border-radius: $drs-border-radius;
-  overflow: hidden;
+  // overflow: hidden;
   label {
     width: 100%;
     position: relative;
@@ -192,6 +192,7 @@
       button {
         &:disabled + label {
           color: $drs-dark-color;
+          border-color: #ff5151;
           &::after {
             background: rgba(255, 10, 0, 0.2);
           }
